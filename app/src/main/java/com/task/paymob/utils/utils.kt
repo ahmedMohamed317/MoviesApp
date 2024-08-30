@@ -1,7 +1,6 @@
 package com.task.paymob.utils
 
 import android.content.Context
-import android.provider.Settings
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -22,38 +21,19 @@ object Utils {
         } ?: return handleApiError(response)
     }
 
-    fun getDeviceId(context: Context): String {
-        return Settings.Secure.getString(
-            context.contentResolver,
-            Settings.Secure.ANDROID_ID
-        )
-    }
-
     fun loadImage(context: Context
-                  , link : String
+                  , path : String
                   , imageView: ImageView
                   ,placeholder: Int
-                  ,shouldAddApiLink:Boolean = true
                   ,cornerRadiusValue: Int
     ) {
         val requestOptions = RequestOptions().transform(CenterCrop(), RoundedCorners(cornerRadiusValue))
 
-        if (shouldAddApiLink){
-            val newLink = ("APIS.BASE_URL" + link).replace("\\","/")
-            Glide.with(context)
-                .load(newLink)
-                .apply(requestOptions)
-                .placeholder(placeholder)
-                .into(imageView)
+        Glide.with(context)
+            .load(APIS.POSTER_URL + path)
+            .apply(requestOptions)
+            .placeholder(placeholder)
+            .into(imageView)
 
-
-        }
-        else {
-            Glide.with(context)
-                .load(link)
-                .apply(requestOptions)
-                .placeholder(placeholder)
-                .into(imageView)
-        }
     }
 }

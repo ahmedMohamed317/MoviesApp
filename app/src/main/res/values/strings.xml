@@ -20,4 +20,11 @@
     <string name="scan_qr_code_to_get_your_info">Scan QR Code to get your info .</string>
     <string name="select_your_payment">Select your payment :</string>
     <string name="please_enter_valid_name">Please enter a valid name</string>
+    <string name="no_results_found">No results found !!</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="favorite_btn">favorite button</string>
+    <string name="movie_details">Movie Details</string>
+    <string name="vote_average_format">%1$.1f/10</string>
+    <string name="language_format">Language: %1$s</string>
+
 </resources>

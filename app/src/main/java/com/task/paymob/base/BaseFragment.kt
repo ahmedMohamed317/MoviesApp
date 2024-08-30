@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
-import com.task.paymob.MainActivity
+import com.task.paymob.ui.activity.MainActivity
 
 
 abstract class BaseFragment<VDB : ViewBinding> : Fragment() {

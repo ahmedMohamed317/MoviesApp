@@ -3,8 +3,7 @@ package com.task.paymob.di
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.task.paymob.utils.APIS
-import com.task.paymob.utils.USER_DATA
-import com.task.paymob.utils.USER_INFO
+import com.task.paymob.utils.UserData
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -33,12 +32,10 @@ val networkModule = module {
             .addInterceptor(ChuckerInterceptor(context))
             .addInterceptor(Interceptor { chain: Interceptor.Chain ->
                 val original: Request = chain.request()
-                //Timber.d("bearer ${USER_DATA.CURRENT_USER?.data?.token}")
                 val request: Request = original.newBuilder()
                     .header(
-                        USER_DATA.AUTHORIZATION,
-
-                        USER_DATA.BEARER + USER_INFO.TOKEN
+                        UserData.AUTHORIZATION,
+                        UserData.BEARER + UserData.KEY
                     )
                     .build()
                 chain.proceed(request)

@@ -15,7 +15,7 @@ object LanguageUtils {
         return setLocale(context, lang)
     }
 
-    fun setLocale(context: Context, language: String?): Context? {
+    private fun setLocale(context: Context, language: String?): Context? {
         persist(context, language)
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             updateResources(context, language)
@@ -32,7 +32,7 @@ object LanguageUtils {
     }
 
 
-    fun persist(context: Context, language: String?) {
+    private fun persist(context: Context, language: String?) {
         PreferencesUtils(context).getInstance()?.putString("LANGUAGE_KEY", language!!)
     }
 

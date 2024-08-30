@@ -14,11 +14,13 @@
     <color name="gray_40">#DCDCDC</color>
     <color name="black">#0B0B0B</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="semi_white">#FEFEFE</color>
     <color name="error">#FE2E00</color>
     <color name="success">#3DBD00</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="dark_blue">#262B3E</color>
     <color name="base">#F5F5F5</color>
     <color name="normal_grey">#585858</color>
+    <color name="yellow_star">#ecc440</color>
 
 </resources>

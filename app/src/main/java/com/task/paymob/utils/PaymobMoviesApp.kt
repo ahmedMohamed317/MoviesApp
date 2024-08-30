@@ -3,20 +3,25 @@ package com.task.paymob.utils
 import android.app.Application
 import android.content.Context
 import com.task.paymob.BuildConfig
+import com.task.paymob.di.apiModule
+import com.task.paymob.di.networkModule
 import com.task.paymob.di.repositoryModule
 import com.task.paymob.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import org.koin.core.module.Module
 import timber.log.Timber
 
 class PaymobMoviesApp : Application() {
 
 
-    val listModule: List<Module> = listOf(
+    private val listModule: List<Module> = listOf(
+        apiModule,
         viewModelModule,
         repositoryModule,
+        networkModule
     )
 
     companion object {
@@ -35,7 +40,7 @@ class PaymobMoviesApp : Application() {
             Timber.plant(Timber.DebugTree())
         }
         startKoin {
-            androidLogger()
+            androidLogger(Level.ERROR)
             androidContext(this@PaymobMoviesApp)
 
             modules(

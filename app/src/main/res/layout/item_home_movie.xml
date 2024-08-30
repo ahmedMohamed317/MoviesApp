@@ -1,0 +1,115 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/paddingAndMargin_8"
+    android:layout_marginBottom="@dimen/paddingAndMargin_8"
+    android:layout_marginHorizontal="@dimen/paddingAndMargin_8"
+    app:cardCornerRadius="@dimen/radius_8"
+    app:cardElevation="@dimen/elevate_4"
+    android:background="@drawable/background_4dp_round_corners_white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/dimen_150"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/background_4dp_round_corners_white">
+
+        <TextView
+            android:id="@+id/movie_name"
+            style="@style/HeadlineBold.Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingAndMargin_8"
+            android:clickable="true"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="@color/primary_100"
+            android:textSize="@dimen/font_size_18"
+            app:layout_constraintEnd_toStartOf="@+id/favorite_btn_iv"
+            app:layout_constraintStart_toStartOf="@+id/movie_poster_iv"
+            app:layout_constraintTop_toBottomOf="@+id/movie_poster_iv"
+            tools:text="Movie Name" />
+
+        <TextView
+            android:id="@+id/movie_release_date_tv"
+            style="@style/SubtitleRegular.Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingAndMargin_8"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/lato_medium"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="@color/primary_100"
+            android:textSize="@dimen/font_size_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/movie_poster_iv"
+            app:layout_constraintTop_toBottomOf="@+id/movie_name"
+            tools:text="4-8-2024" />
+
+        <ImageView
+            android:id="@+id/movie_poster_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_232"
+            android:layout_marginStart="@dimen/paddingAndMargin_8"
+            android:layout_marginTop="@dimen/paddingAndMargin_8"
+            android:layout_marginEnd="@dimen/paddingAndMargin_8"
+            android:background="@drawable/background_4dp_round_corners_white"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/movie_placeholder"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/favorite_btn_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/paddingAndMargin_8"
+            android:scaleType="fitXY"
+            android:src="@drawable/fav_icon_filled"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/movie_name" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:maxWidth="@dimen/dimen_150"
+            android:numStars="5"
+            android:saveEnabled="false"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:stepSize="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/movie_release_date_tv"
+            app:layout_constraintTop_toBottomOf="@+id/movie_release_date_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

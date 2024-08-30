@@ -2,37 +2,24 @@ package com.task.paymob.utils
 
 
 
-//SHARED PREFERENCE
-object SHARED_PREFERENCE {
+object UserData {
 
-}
-
-object USER_DATA {
-    //@JvmField
-    //var CURRENT_USER: ResponseConfirmCode? = null
     const val AUTHORIZATION = "Authorization"
     const val BEARER = "Bearer "
-}
-
-
-object USER_INFO {
-    const val ENGLISH_LANGUAGE = "en"
-    const val ARABIC_LANGUAGE = "ar"
-
-
-    @JvmField
-    var CURRENT_LANGUAGE: String = ""
-    var TOKEN: String = ""
-    var CURRENT_LANGUAGE_ID: String = ""
+    const val KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNzY5OWFjOWNkZDljOTUwMTlkYjBiNGQ4ZmZmODA2YyIsIm5iZiI6MTcyNDk2NzcwMi45NzIxMTQsInN1YiI6IjY2ZDBjOGRlNGQxYzNlNGM4OTk2MjU4MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gXM8aI0NsqQOOjYh0NfNCIr1kRXNeqIMorHUeTA8mdg"
 
 }
+
 
 object APIS {
-    //    http://ec2-54-194-113-34.eu-west-1.compute.amazonaws.com:5005
-//    const val BASE_URL = "http://ec2-34-245-145-165.eu-west-1.compute.amazonaws.com:5005/"
-    const val BASE_URL = "https://api.themoviedb.org/3/discover/movie/"
-
-
+    const val BASE_URL = "https://api.themoviedb.org/3/discover/"
+    const val GET_MOVIES = "movie"
+    const val POSTER_URL = "https://image.tmdb.org/t/p/w500/"
 
 }
+object QUERY {
+    const val QUERY_SORT = "sort_by"
+    const val QUERY_PRIMARY_RELEASE_YEAR = "primary_release_year"
+    const val QUERY_PAGE = "page"
 
+}

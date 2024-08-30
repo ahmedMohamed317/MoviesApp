@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace 'com.task.paymob'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.task.paymob"

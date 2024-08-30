@@ -1,6 +1,7 @@
 package com.task.paymob.di
 
 import android.content.Context
+import com.task.paymob.api.home.HomeApi
 import com.task.paymob.repository.payment.MovieDetailsRepository
 import com.task.paymob.repository.payment.MovieDetailsRepositoryImpl
 import com.task.paymob.repository.home.HomeRepository
@@ -11,11 +12,11 @@ import org.koin.dsl.module
 val repositoryModule = module {
 
     fun provideHomeRepository(
-        context: Context
+        homeApi: HomeApi
     ): HomeRepository {
-        return HomeRepositoryImpl(context)
+        return HomeRepositoryImpl(homeApi)
     }
-    single { provideHomeRepository( androidContext()) }
+    single { provideHomeRepository( get() ) }
 
     fun provideMovieDetailsRepository(
         context: Context

@@ -1,8 +1,9 @@
-package com.task.paymob
+package com.task.paymob.ui.activity
 
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
+import com.task.paymob.R
 import com.task.paymob.base.BaseActivity
 import com.task.paymob.databinding.ActivityMainBinding
 

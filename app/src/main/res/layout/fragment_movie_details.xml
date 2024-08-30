@@ -1,20 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
-    android:splitMotionEvents="false"
-    >
+    android:fillViewport="true">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <include
+            android:id="@+id/my_toolbar"
+            layout="@layout/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/movie_poster_iv"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:src="@drawable/movie_placeholder"
+            android:layout_marginStart="@dimen/paddingAndMargin_20"
+            android:layout_marginEnd="@dimen/paddingAndMargin_20"
+            android:layout_marginTop="@dimen/paddingAndMargin_8"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="H,16:9"
+            android:contentDescription="@string/movie_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+
+        <TextView
+            android:id="@+id/movie_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingAndMargin_16"
+            android:textColor="@color/primary_100"
+            android:textSize="@dimen/font_size_20"
+            android:fontFamily="@font/lato_bold"
+            android:layout_marginStart="@dimen/paddingAndMargin_8"
+            app:layout_constraintStart_toStartOf="@+id/movie_poster_iv"
+            app:layout_constraintTop_toBottomOf="@+id/movie_poster_iv"
+            tools:text="Movie Name" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/release_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingAndMargin_16"
+            android:clickable="true"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxWidth="@dimen/paddingAndMargin_128"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="@color/secondary_100"
+            android:textSize="@dimen/font_size_16"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/movie_name_tv"
+            app:layout_constraintTop_toBottomOf="@+id/movie_name_tv"
+            tools:text="2-2-2022" />
+
+
+        <ImageView
+            android:id="@+id/favorite_btn_iv"
+            android:layout_width="@dimen/dimen_48"
+            android:layout_height="@dimen/dimen_48"
+            android:layout_marginEnd="@dimen/paddingAndMargin_8"
+            android:background="@drawable/background_4dp_round_corners_white"
+            android:contentDescription="@string/favorite_btn"
+            android:padding="@dimen/paddingAndMargin_12"
+            android:src="@drawable/fav_icon_unfilled"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/release_date_tv"
+            app:layout_constraintEnd_toEndOf="@+id/movie_poster_iv"
+            app:layout_constraintTop_toTopOf="@+id/release_date_tv" />
+
+
+        <TextView
+            android:id="@+id/product_description_text_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingAndMargin_16"
+            android:layout_marginEnd="@dimen/paddingAndMargin_20"
+            android:fontFamily="@font/lato_medium"
+            android:textColor="@color/primary_100"
+            android:textSize="@dimen/font_size_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/movie_name_tv"
+            app:layout_constraintTop_toBottomOf="@+id/release_date_tv"
+            tools:text="Description" />
+
+        <TextView
+            android:id="@+id/vote_average_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingAndMargin_8"
+            android:layout_marginEnd="@dimen/paddingAndMargin_20"
+            android:drawableStart="@drawable/baseline_star_24"
+            android:gravity="center_vertical"
+            android:textColor="@color/primary_100"
+            android:fontFamily="@font/lato_medium"
+            android:drawablePadding="@dimen/paddingAndMargin_4"
+            android:textSize="@dimen/font_size_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/product_description_text_tv"
+            app:layout_constraintTop_toBottomOf="@+id/product_description_text_tv"
+            tools:text="9.0/10" />
+
+        <TextView
+            android:id="@+id/language_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingAndMargin_8"
+            android:textColor="@color/primary_100"
+            android:textSize="@dimen/font_size_12"
+            android:fontFamily="@font/lato_regular"
+            app:layout_constraintStart_toStartOf="@+id/vote_average_tv"
+            app:layout_constraintTop_toBottomOf="@+id/vote_average_tv"
+            tools:text="English" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
