@@ -51,9 +51,6 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
     private fun setupMovieData(){
         binding.movieNameTv.text = args.movie.title
         binding.movieNameTv.isSelected = true
-        binding.favoriteBtnIv.setOnClickListener {
-
-        }
         binding.releaseDateTv.text = args.movie.releaseDate
         if (args.movie.posterPath != null) {
             Utils.loadImage(

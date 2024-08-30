@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.task.paymob.R
 import com.task.paymob.viewmodel.home.HomeViewModel
 import com.task.paymob.base.BaseFragment
@@ -18,9 +20,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val homeViewModel by viewModel<HomeViewModel>()
-    private val favoriteMoviesList : MutableList<Movie> = mutableListOf()
     private val homeMoviesAdapter: HomeMoviesAdapter by lazy {
-        HomeMoviesAdapter(::navigateToMovieDetailsFragment,favoriteMoviesList,::addFavoriteMovie,::deleteFavoriteMovie)
+        HomeMoviesAdapter(::navigateToMovieDetailsFragment,homeViewModel.favoriteMoviesList,::addFavoriteMovie,::deleteFavoriteMovie)
     }
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -42,6 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initSetAdapter() {
         binding.moviesRv.adapter = homeMoviesAdapter
+        setupPagination()
     }
 
     override fun initToolBar() {
@@ -51,14 +53,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun getMoviesForHome(year: String = "2024", sortBy: String = "", page : Int = 1) {
+    private fun getMoviesForHome(year: String = "2024", sortBy: String = "") {
         DialogUtil.showDialog(requireActivity())
-        homeViewModel.getMoviesForHome(year, sortBy, page)
+        homeViewModel.getMoviesForHome(year, sortBy, homeViewModel.currentPage)
         homeViewModel.responseGetMovies.observe(viewLifecycleOwner) {
 
             DialogUtil.dismissDialog()
             if (it.success != false) {
-                homeMoviesAdapter.submitList(it.results)
+                homeViewModel.moviesList.addAll(it.results)
+                if (homeViewModel.currentPage == 1)
+                     homeMoviesAdapter.submitList(homeViewModel.moviesList)
                 homeMoviesAdapter.notifyDataSetChanged()
                 binding.noResultsTv.visibility = View.GONE
             } else {
@@ -86,8 +90,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         homeViewModel.getAllFavoriteMovies()
         homeViewModel.responseGetFavoriteMovies.observe(viewLifecycleOwner) {
             DialogUtil.dismissDialog()
-            favoriteMoviesList.clear()
-            favoriteMoviesList.addAll(it)
+            homeViewModel.favoriteMoviesList.clear()
+            homeViewModel.favoriteMoviesList.addAll(it)
             getMoviesForHome()
         }
         homeViewModel.showError.observe(viewLifecycleOwner) {
@@ -105,7 +109,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun addFavoriteMovie(movie: Movie,imageView: ImageView){
         homeViewModel.addMovieToFavorite(movie)
         homeViewModel.responseAddedToFavorite.observe(viewLifecycleOwner) {
-            favoriteMoviesList.add(movie)
+            homeViewModel.favoriteMoviesList.add(movie)
             imageView.setImageResource(R.drawable.fav_icon_filled)
         }
         homeViewModel.showError.observe(viewLifecycleOwner) {
@@ -119,7 +123,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun deleteFavoriteMovie(movie: Movie,imageView: ImageView){
         homeViewModel.deleteFavoriteMovie(movie)
         homeViewModel.responseIsMovieDeleted.observe(viewLifecycleOwner) {
-            favoriteMoviesList.remove(movie)
+            homeViewModel.favoriteMoviesList.remove(movie)
             imageView.setImageResource(R.drawable.fav_icon_unfilled)
         }
         homeViewModel.showError.observe(viewLifecycleOwner) {
@@ -130,5 +134,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     }
 
+    private fun setupPagination() {
+        binding.moviesRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
 
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                if (totalItemCount <= (lastVisibleItemPosition + 6)) {
+                    homeViewModel.currentPage++
+                    homeViewModel.getMoviesForHome(page = homeViewModel.currentPage)
+                }
+            }
+        })
+    }
 }

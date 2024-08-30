@@ -17,8 +17,10 @@ class HomeViewModel(private val repository: HomeRepository,private val sharedRep
     val responseIsMovieDeleted = SingleLiveEvent<Boolean>()
     val responseAddedToFavorite = SingleLiveEvent<Boolean>()
     var currentPage = 1
+    val favoriteMoviesList : MutableList<Movie> = mutableListOf()
+    val moviesList : MutableList<Movie> = mutableListOf()
 
-    fun getMoviesForHome(year: String, sortBy: String, page: Int) {
+    fun getMoviesForHome(year: String ="2024", sortBy: String ="", page: Int) {
         call({
             return@call repository.getMovies(year, sortBy, page)
         }) {
