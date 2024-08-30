@@ -1,6 +1,7 @@
 package com.task.paymob.ui.payment
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -8,6 +9,7 @@ import com.task.paymob.R
 import com.task.paymob.viewmodel.movies_details.MoviesDetailsViewModel
 import com.task.paymob.base.BaseFragment
 import com.task.paymob.databinding.FragmentMovieDetailsBinding
+import com.task.paymob.model.Movie
 import com.task.paymob.utils.Utils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,13 +28,13 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
         binding.myToolbar.backBtn.setOnClickListener {
             navigateUp()
         }
-
     }
 
     override fun initViewModel() {
     }
 
     override fun onCreateInit() {
+        isTheMovieFavorite(args.movie)
         setupMovieData()
     }
 
@@ -70,5 +72,59 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
 
     }
 
+    private fun addFavoriteMovie(){
+        moviesDetailsViewModel.addMovieToFavorite(args.movie)
+        moviesDetailsViewModel.responseAddedToFavorite.observe(viewLifecycleOwner) {
+            binding.favoriteBtnIv.setImageResource(R.drawable.fav_icon_filled)
+        }
+        moviesDetailsViewModel.showError.observe(viewLifecycleOwner) {
+            showSnackbar(it)
+        }
+
+
+    }
+
+    private fun deleteFavoriteMovie(){
+        moviesDetailsViewModel.deleteFavoriteMovie(args.movie)
+        moviesDetailsViewModel.responseIsMovieDeleted.observe(viewLifecycleOwner) {
+            binding.favoriteBtnIv.setImageResource(R.drawable.fav_icon_unfilled)
+        }
+        moviesDetailsViewModel.showError.observe(viewLifecycleOwner) {
+            showSnackbar(it)
+        }
+
+
+    }
+
+    private fun isTheMovieFavorite(movie: Movie){
+        moviesDetailsViewModel.isThisMovieFavorite(movie.id)
+        moviesDetailsViewModel.responseIsThisMovieFavorite.observe(viewLifecycleOwner) { isFavorite ->
+            binding.favoriteBtnIv.visibility = View.VISIBLE
+            binding.favoriteBtnIv.setOnClickListener {
+                handleFavoriteButtonClick(isFavorite)
+            }
+            handleFavoriteButtonView(isFavorite)
+        }
+        moviesDetailsViewModel.showError.observe(viewLifecycleOwner) {
+            showSnackbar(it)
+        }
+
+
+    }
+
+    private fun handleFavoriteButtonView(isFavorite: Boolean){
+        if (isFavorite) {
+            binding.favoriteBtnIv.setImageResource(R.drawable.fav_icon_filled)
+        } else {
+            binding.favoriteBtnIv.setImageResource(R.drawable.fav_icon_unfilled)
+        }
+    }
+    private fun handleFavoriteButtonClick(isFavorite: Boolean){
+        if (isFavorite) {
+            deleteFavoriteMovie()
+        } else {
+            addFavoriteMovie()
+        }
+    }
 }
 

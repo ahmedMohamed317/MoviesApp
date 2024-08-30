@@ -6,17 +6,21 @@ import com.task.paymob.repository.payment.MovieDetailsRepository
 import com.task.paymob.repository.payment.MovieDetailsRepositoryImpl
 import com.task.paymob.repository.home.HomeRepository
 import com.task.paymob.repository.home.HomeRepositoryImpl
+import com.task.paymob.repository.shared_repo.SharedRepository
+import com.task.paymob.repository.shared_repo.SharedRepositoryImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val repositoryModule = module {
 
     fun provideHomeRepository(
-        homeApi: HomeApi
+        homeApi: HomeApi,
+        context: Context
+
     ): HomeRepository {
-        return HomeRepositoryImpl(homeApi)
+        return HomeRepositoryImpl(homeApi,context)
     }
-    single { provideHomeRepository( get() ) }
+    single { provideHomeRepository( get(),androidContext() ) }
 
     fun provideMovieDetailsRepository(
         context: Context
@@ -25,5 +29,11 @@ val repositoryModule = module {
     }
     single { provideMovieDetailsRepository( androidContext()) }
 
+    fun provideSharedRepository(
+        context: Context
+    ): SharedRepository {
+        return SharedRepositoryImpl(context)
+    }
+    factory { provideSharedRepository( androidContext()) }
 
 }

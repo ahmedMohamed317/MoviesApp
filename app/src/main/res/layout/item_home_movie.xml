@@ -87,7 +87,7 @@
             android:contentDescription="@string/app_name"
             android:padding="@dimen/paddingAndMargin_8"
             android:scaleType="fitXY"
-            android:src="@drawable/fav_icon_filled"
+            android:src="@drawable/fav_icon_unfilled"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/movie_name"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,5 +1,7 @@
 package com.task.paymob.model
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -19,6 +21,7 @@ data class ResponseGetMovies(
 
 ) : Parcelable
 
+@Entity(tableName = "movies")
 @Parcelize
 data class Movie(
     @SerializedName("adult")
@@ -27,9 +30,7 @@ data class Movie(
     @SerializedName("backdrop_path")
     val backdropPath: String?,
 
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>,
-
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     val id: Int,
 
@@ -61,5 +62,6 @@ data class Movie(
     val voteAverage: Double,
 
     @SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int ,
+
 ) : Parcelable

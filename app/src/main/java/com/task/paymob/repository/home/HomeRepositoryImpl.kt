@@ -1,15 +1,21 @@
 package com.task.paymob.repository.home
 
 
+import android.content.Context
 import com.task.paymob.api.home.HomeApi
+import com.task.paymob.datasource.local.AppDatabase
+import com.task.paymob.model.Movie
 import com.task.paymob.model.ResponseGetMovies
+import com.task.paymob.repository.shared_repo.SharedRepository
 import com.task.paymob.utils.AppResult
 import com.task.paymob.utils.Utils.handleApiError
 import com.task.paymob.utils.Utils.handleSuccess
 
 class HomeRepositoryImpl(
-    private val api: HomeApi,
-) : HomeRepository {
+    private val api: HomeApi,context: Context
+) : HomeRepository,SharedRepository {
+    private val dao = AppDatabase.getDaoInstance(context)
+
     override suspend fun getMovies( year: String , sortBy: String , page: Int): AppResult<ResponseGetMovies> {
         return try {
             val response = api.getMoviesForHome(year ,sortBy,page)
@@ -24,4 +30,34 @@ class HomeRepositoryImpl(
     }
 
 
+    override suspend fun getAllFavoriteMovies(): AppResult<List<Movie>> {
+        return try {
+            val movies = dao.getFavoriteMovies()
+            AppResult.Success(movies)
+        } catch (e: Exception) {
+            AppResult.Error(e)
+        }
+    }
+
+
+
+    override suspend fun addMovieToFavorite(movie: Movie): AppResult<Boolean> {
+        return try {
+            val result = dao.addMovieToFavorite(movie)
+           AppResult.Success(result > 0 )
+        } catch (e: Exception) {
+            AppResult.Error(e)
+        }
+    }
+
+    override suspend fun deleteMovieFromFavorite(movie: Movie): AppResult<Boolean> {
+        return try {
+            val result = dao.deleteMovieFromFavorite(movie)
+            AppResult.Success(result > 0 )
+        } catch (e: Exception) {
+            AppResult.Error(e)
+        }
+    }
 }
+
+
