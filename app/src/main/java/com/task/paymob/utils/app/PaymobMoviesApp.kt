@@ -1,10 +1,11 @@
-package com.task.paymob.utils
+package com.task.paymob.utils.app
 
 import android.app.Application
 import com.task.paymob.BuildConfig
 import com.task.paymob.di.apiModule
 import com.task.paymob.di.networkModule
 import com.task.paymob.di.repositoryModule
+import com.task.paymob.di.roomModule
 import com.task.paymob.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -20,7 +21,8 @@ class PaymobMoviesApp : Application() {
         apiModule,
         viewModelModule,
         repositoryModule,
-        networkModule
+        networkModule,
+        roomModule
     )
 
     companion object {

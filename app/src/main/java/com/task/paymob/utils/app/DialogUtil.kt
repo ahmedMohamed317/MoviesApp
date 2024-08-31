@@ -1,4 +1,4 @@
-package com.task.paymob.utils
+package com.task.paymob.utils.app
 
 import android.app.Dialog
 import android.content.Context

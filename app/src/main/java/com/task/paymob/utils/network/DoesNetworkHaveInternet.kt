@@ -1,4 +1,4 @@
-package com.task.paymob.utils
+package com.task.paymob.utils.network
 
 import timber.log.Timber
 import java.io.IOException

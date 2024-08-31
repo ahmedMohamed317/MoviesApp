@@ -6,8 +6,8 @@ import com.task.paymob.model.Movie
 import com.task.paymob.model.ResponseGetMovies
 import com.task.paymob.repository.home.HomeRepository
 import com.task.paymob.repository.shared_repo.SharedRepository
-import com.task.paymob.utils.AppResult
-import com.task.paymob.utils.SingleLiveEvent
+import com.task.paymob.utils.api.AppResult
+import com.task.paymob.utils.api.SingleLiveEvent
 
 class HomeViewModel(private val repository: HomeRepository,private val sharedRepository: SharedRepository) : BaseViewModel() {
 

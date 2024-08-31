@@ -2,7 +2,7 @@ package com.task.paymob.repository.home
 
 import com.task.paymob.model.Movie
 import com.task.paymob.model.ResponseGetMovies
-import com.task.paymob.utils.AppResult
+import com.task.paymob.utils.api.AppResult
 
 
 interface HomeRepository {

@@ -14,7 +14,7 @@ import com.task.paymob.base.BaseFragment
 import com.task.paymob.databinding.FragmentHomeBinding
 import com.task.paymob.model.Movie
 import com.task.paymob.ui.home.adapter.HomeMoviesAdapter
-import com.task.paymob.utils.DialogUtil
+import com.task.paymob.utils.app.DialogUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {

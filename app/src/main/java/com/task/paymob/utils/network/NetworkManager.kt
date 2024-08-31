@@ -1,4 +1,4 @@
-package com.task.paymob.utils
+package com.task.paymob.utils.network
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -2,8 +2,8 @@ package com.task.paymob.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.task.paymob.utils.APIS
-import com.task.paymob.utils.UserData
+import com.task.paymob.utils.app.APIS
+import com.task.paymob.utils.app.UserData
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request

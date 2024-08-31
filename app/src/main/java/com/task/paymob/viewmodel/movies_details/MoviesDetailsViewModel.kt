@@ -5,8 +5,8 @@ import com.task.paymob.base.BaseViewModel
 import com.task.paymob.model.Movie
 import com.task.paymob.repository.movieDetails.MovieDetailsRepository
 import com.task.paymob.repository.shared_repo.SharedRepository
-import com.task.paymob.utils.AppResult
-import com.task.paymob.utils.SingleLiveEvent
+import com.task.paymob.utils.api.AppResult
+import com.task.paymob.utils.api.SingleLiveEvent
 
 class MoviesDetailsViewModel(private val repository: MovieDetailsRepository,private val sharedRepository: SharedRepository) : BaseViewModel() {
 

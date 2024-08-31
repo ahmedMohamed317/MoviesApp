@@ -1,14 +1,12 @@
 package com.task.paymob.repository.movieDetails
 
 
-import android.content.Context
-import com.task.paymob.datasource.local.AppDatabase
-import com.task.paymob.utils.AppResult
+import com.task.paymob.datasource.local.MovieDao
+import com.task.paymob.utils.api.AppResult
 
 class MovieDetailsRepositoryImpl(
-      context: Context
+    private val dao : MovieDao
 ) : MovieDetailsRepository {
-    private val dao = AppDatabase.getDaoInstance(context)
 
     override suspend fun isThisMovieFavorite(movieId : Int): AppResult<Boolean> {
         return try {

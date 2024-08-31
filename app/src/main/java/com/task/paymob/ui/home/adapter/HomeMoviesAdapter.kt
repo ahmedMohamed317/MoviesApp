@@ -10,7 +10,7 @@ import com.task.paymob.R
 import com.task.paymob.base.DiffCallback
 import com.task.paymob.databinding.ItemHomeMovieBinding
 import com.task.paymob.model.Movie
-import com.task.paymob.utils.Utils
+import com.task.paymob.utils.app.Utils
 
 
 class HomeMoviesAdapter(

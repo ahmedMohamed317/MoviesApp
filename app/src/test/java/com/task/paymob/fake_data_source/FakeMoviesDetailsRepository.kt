@@ -3,7 +3,7 @@ package com.task.paymob.fake_data_source
 import com.task.paymob.model.Movie
 import com.task.paymob.repository.movieDetails.MovieDetailsRepository
 import com.task.paymob.repository.shared_repo.SharedRepository
-import com.task.paymob.utils.AppResult
+import com.task.paymob.utils.api.AppResult
 
 class FakeMoviesDetailsRepository : MovieDetailsRepository, SharedRepository {
 

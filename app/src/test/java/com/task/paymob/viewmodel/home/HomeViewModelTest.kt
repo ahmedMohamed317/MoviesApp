@@ -33,41 +33,41 @@ class HomeViewModelTest {
 
     @Test
     fun `getMoviesForHome should return a list of movies`() = runTest {
-        // Arrange
+        // Given
         val movie =Movie(false,"",1,"","Movie","",0.0,"","","",false,0.0,0)
         fakeRepository.apiMovies.add(movie) // Adding a movie to the fake repo
 
-        // Act
+        // When
         viewModel.getMoviesForHome(page = 1)
 
-        // Assert
+        // Then
         assertEquals(1, viewModel.responseGetMovies.getOrAwaitValue()?.results?.size) // Assuming only one movie is added
         assertEquals(movie, viewModel.responseGetMovies.getOrAwaitValue()?.results?.get(0)) // Asserting the added movie
     }
 
     @Test
     fun `addMovieToFavorite should add a movie to the favorites`() = runTest {
-        // Arrange
+        // Given
         val movie =Movie(false,"",1,"","Movie","",0.0,"","","",false,0.0,0)
 
-        // Act
+        // When
         viewModel.addMovieToFavorite(movie)
 
-        // Assert
+        // Then
         assertEquals(true, viewModel.responseAddedToFavorite.getOrAwaitValue())
         assertEquals(movie, fakeRepository.favoriteMovies[0])
     }
 
     @Test
     fun `deleteFavoriteMovie should remove a movie from the favorites`() = runTest {
-        // Arrange
+        // Given
         val movie =Movie(false,"",1,"","Movie","",0.0,"","","",false,0.0,0)
-        fakeRepository.addMovieToFavorite(movie) // Adding a movie to the fake repo
+        fakeRepository.addMovieToFavorite(movie)
 
-        // Act
+        // When
         viewModel.deleteFavoriteMovie(movie)
 
-        // Assert
+        // Then
         assertEquals(true, viewModel.responseIsMovieDeleted.getOrAwaitValue ())
         assertTrue(fakeRepository.favoriteMovies.isEmpty())
     }

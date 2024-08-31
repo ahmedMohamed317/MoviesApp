@@ -1,4 +1,4 @@
-package com.task.paymob.utils
+package com.task.paymob.utils.api
 
 import android.content.ContentValues.TAG
 import com.google.gson.GsonBuilder

@@ -3,9 +3,9 @@ package com.task.paymob.base
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.task.paymob.utils.AppResult
-import com.task.paymob.utils.NetworkManager
-import com.task.paymob.utils.SingleLiveEvent
+import com.task.paymob.utils.api.AppResult
+import com.task.paymob.utils.network.NetworkManager
+import com.task.paymob.utils.api.SingleLiveEvent
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

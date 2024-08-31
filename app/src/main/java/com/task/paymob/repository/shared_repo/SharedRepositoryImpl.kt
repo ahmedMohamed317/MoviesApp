@@ -1,16 +1,14 @@
 package com.task.paymob.repository.shared_repo
 
 
-import android.content.Context
-import com.task.paymob.datasource.local.AppDatabase
+import com.task.paymob.datasource.local.MovieDao
 import com.task.paymob.model.Movie
-import com.task.paymob.utils.AppResult
+import com.task.paymob.utils.api.AppResult
 
 
 class SharedRepositoryImpl(
-    context: Context
+    private val dao : MovieDao
 ) : SharedRepository {
-    private val dao = AppDatabase.getDaoInstance(context)
 
     override suspend fun addMovieToFavorite(movie: Movie): AppResult<Boolean> {
         return try {

@@ -10,7 +10,7 @@ import com.task.paymob.viewmodel.movies_details.MoviesDetailsViewModel
 import com.task.paymob.base.BaseFragment
 import com.task.paymob.databinding.FragmentMovieDetailsBinding
 import com.task.paymob.model.Movie
-import com.task.paymob.utils.Utils
+import com.task.paymob.utils.app.Utils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

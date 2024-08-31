@@ -1,6 +1,6 @@
 package com.task.paymob.repository.movieDetails
 
-import com.task.paymob.utils.AppResult
+import com.task.paymob.utils.api.AppResult
 
 interface MovieDetailsRepository {
 
