@@ -3,8 +3,6 @@ package com.task.paymob.utils.network
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import android.net.NetworkCapabilities
-import com.task.paymob.utils.network.ConnectivityObserver
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -12,7 +10,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 class NetworkConnectivityObserver(
-    private val context: Context
+     context: Context
 ) : ConnectivityObserver {
 
     private val connectivityManager: ConnectivityManager =
@@ -42,14 +40,14 @@ class NetworkConnectivityObserver(
                     launch { send(ConnectivityObserver.Status.UnAvailable) }
                 }
 
-                override fun onCapabilitiesChanged(
-                    network: Network,
-                    networkCapabilities: NetworkCapabilities
-                ) {
-                    super.onCapabilitiesChanged(network, networkCapabilities)
-                    if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)) {
-                    }
-                }
+//                override fun onCapabilitiesChanged(
+//                    network: Network,
+//                    networkCapabilities: NetworkCapabilities
+//                ) {
+//                    super.onCapabilitiesChanged(network, networkCapabilities)
+////                    if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)) {
+////                    }
+//                }
             }
 
 

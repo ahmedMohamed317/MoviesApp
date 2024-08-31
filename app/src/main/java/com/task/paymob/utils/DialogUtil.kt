@@ -10,7 +10,6 @@ import com.task.paymob.R
 
 object DialogUtil {
     private var dialog: Dialog? = null
-    private var exitAlertDialog: Dialog? = null
 
     fun showDialog(context: Context?) {
         if (dialog != null && dialog?.isShowing!!) {

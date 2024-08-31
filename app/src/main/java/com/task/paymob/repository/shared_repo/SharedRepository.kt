@@ -1,7 +1,6 @@
 package com.task.paymob.repository.shared_repo
 
 import com.task.paymob.model.Movie
-import com.task.paymob.model.ResponseGetMovies
 import com.task.paymob.utils.AppResult
 
 

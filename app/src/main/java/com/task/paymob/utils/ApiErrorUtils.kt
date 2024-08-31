@@ -1,9 +1,9 @@
 package com.task.paymob.utils
 
 import android.content.ContentValues.TAG
-import android.util.Log
 import com.google.gson.GsonBuilder
 import retrofit2.Response
+import timber.log.Timber
 import java.io.IOException
 
 object ApiErrorUtils {
@@ -14,7 +14,7 @@ object ApiErrorUtils {
         try {
             error = gson.fromJson(response.errorBody()?.string(), ApiError::class.java)
         } catch (e: IOException) {
-            e.message?.let { Log.d(TAG, it) }
+            e.message?.let { Timber.tag(TAG).d(it) }
             return ApiError()
         }
         return error

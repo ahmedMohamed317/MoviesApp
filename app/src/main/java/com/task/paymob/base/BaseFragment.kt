@@ -1,27 +1,23 @@
 package com.task.paymob.base
 
-import android.content.Context
-import android.graphics.Color
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
-import com.task.paymob.ui.activity.MainActivity
 
 
 abstract class BaseFragment<VDB : ViewBinding> : Fragment() {
     private var _binding: VDB? = null
     protected val binding get() = _binding!!
-    var snackBar: Snackbar? = null
+    private var snackBar: Snackbar? = null
     private var notifyCount = 0
     private var offersCount = 0
     override fun onCreateView(
@@ -38,7 +34,7 @@ abstract class BaseFragment<VDB : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        handleBars(true)
+        handleBars()
         setData()
         initToolBar()
         onCreateInit()
@@ -89,33 +85,20 @@ abstract class BaseFragment<VDB : ViewBinding> : Fragment() {
         }
     }
 
-    private fun handleBars(isHidden: Boolean) {
+    private fun handleBars() {
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-        when (isHidden) {
-            true -> {
-                (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-                activity?.window?.setFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN
-                )
-            }
+        val window = requireActivity().window
+        val decorView = window.decorView
 
-            else -> {
-                (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-                activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-            }
-
+        WindowInsetsControllerCompat(window, decorView).apply {
+            // Show the status bar
+            show(WindowInsetsCompat.Type.statusBars())
+            // Show the navigation bar
+            show(WindowInsetsCompat.Type.navigationBars())
         }
-
     }
 
-    protected fun updateStatusBarColor(color: Int) {
-        // Color must be in hexadecimal fromat
-        val hexColor = Integer.toHexString(ContextCompat.getColor(requireContext(), color))
-        val window: Window = (activity as MainActivity).window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = Color.parseColor("#$hexColor")
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -124,21 +107,4 @@ abstract class BaseFragment<VDB : ViewBinding> : Fragment() {
 
 
 
-    fun hideKeyboard() {
-        val imm =
-            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(requireView().windowToken,0)
-    }
-    fun adjustIconsColor(isWhite : Boolean) {
-        if (!isWhite) {
-            activity?.window?.getDecorView()?.setSystemUiVisibility(
-                activity?.window?.getDecorView()
-                    ?.getSystemUiVisibility()!! or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            )
-        } else {
-
-            activity?.window?.decorView?.systemUiVisibility = activity?.window?.decorView
-                ?.systemUiVisibility!! and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-        }
-    }
 }

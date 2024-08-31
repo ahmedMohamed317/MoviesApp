@@ -7,9 +7,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.net.NetworkRequest
-import android.os.Build
 import androidx.lifecycle.LiveData
-import com.task.paymob.utils.DoesNetworkHaveInternet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,18 +27,11 @@ class NetworkUtils(val context: Context) : LiveData<Boolean>() {
         postValue(validNetworks.size > 0)
     }
 
-    fun isOnline(context: Context): Boolean {
+    private fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         val capabilities =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            } else {
-                @Suppress("DEPRECATION") val networkInfo =
-                    connectivityManager.activeNetworkInfo ?: return false
-                @Suppress("DEPRECATION")
-                return networkInfo.isConnected
-            }
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         if (capabilities != null) {
             when {
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {

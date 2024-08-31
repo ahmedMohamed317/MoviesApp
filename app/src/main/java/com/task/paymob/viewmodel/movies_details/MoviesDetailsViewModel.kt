@@ -3,7 +3,7 @@ package com.task.paymob.viewmodel.movies_details
 
 import com.task.paymob.base.BaseViewModel
 import com.task.paymob.model.Movie
-import com.task.paymob.repository.payment.MovieDetailsRepository
+import com.task.paymob.repository.movieDetails.MovieDetailsRepository
 import com.task.paymob.repository.shared_repo.SharedRepository
 import com.task.paymob.utils.AppResult
 import com.task.paymob.utils.SingleLiveEvent

@@ -10,7 +10,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
 
     viewModel {
-        HomeViewModel(repository = get() , sharedRepository = get(), )
+        HomeViewModel(repository = get() , sharedRepository = get() )
     }
 
     viewModel {

@@ -1,7 +1,6 @@
 package com.task.paymob.utils
 
 import android.app.Application
-import android.content.Context
 import com.task.paymob.BuildConfig
 import com.task.paymob.di.apiModule
 import com.task.paymob.di.networkModule
@@ -27,9 +26,9 @@ class PaymobMoviesApp : Application() {
     companion object {
         private var mContext: PaymobMoviesApp? = null
 
-        fun getContext(): Context? {
-            return mContext
-        }
+//        fun getContext(): Context? {
+//            return mContext
+//        }
 
     }
 

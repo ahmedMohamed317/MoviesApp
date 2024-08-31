@@ -1,4 +1,4 @@
-package com.task.paymob.repository.payment
+package com.task.paymob.repository.movieDetails
 
 import com.task.paymob.utils.AppResult
 

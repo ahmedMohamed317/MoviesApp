@@ -1,7 +1,6 @@
 package com.task.paymob.ui.home.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -44,7 +43,6 @@ class HomeMoviesAdapter(
             binding.movieName.isSelected = true
             handleFavoriteButtonView(binding.favoriteBtnIv,movie)
             binding.favoriteBtnIv.setOnClickListener {
-                Log.d("TAG", "bind: ${movie.id}")
                 handleFavoriteButtonClick(binding.favoriteBtnIv,movie)
             }
             binding.movieReleaseDateTv.text = movie.releaseDate

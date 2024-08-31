@@ -6,8 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.task.paymob.model.Movie
-import com.task.paymob.utils.SingleLiveEvent
-import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface MovieDao {

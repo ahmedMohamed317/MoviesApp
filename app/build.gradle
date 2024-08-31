@@ -129,11 +129,22 @@ dependencies {
     debugImplementation "com.github.chuckerteam.chucker:library:4.0.0"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:4.0.0"
 
-    // Android Unit Test and U.I. Test Library
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_junit_version"
+//    // Android Unit Test and U.I. Test Library
+//    testImplementation "junit:junit:$junit_version"
+//    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
+//    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_junit_version"
 
+
+    // AndroidX and Robolectric
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+    testImplementation "org.robolectric:robolectric:4.8"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0"
+
+
+// InstantTaskExecutorRule
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     // Spinner
     implementation 'com.github.ganfra:material-spinner:2.0.0'
 
