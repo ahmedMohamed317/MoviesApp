@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.task.paymob.ui.payment.MovieDetailsFragment"
+        android:name="com.task.paymob.ui.movie_details.MovieDetailsFragment"
         android:label="MovieDetailsFragment">
         <argument
             android:name="movie"

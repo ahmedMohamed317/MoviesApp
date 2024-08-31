@@ -11,7 +11,9 @@ import com.task.paymob.repository.shared_repo.SharedRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
-
+    // providing repository instances for viewmodels
+    // single for singleton instance
+    // factory for new instance created every time
     fun provideHomeRepository(
         homeApi: HomeApi,
         movieDao: MovieDao

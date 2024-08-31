@@ -22,7 +22,7 @@ class MovieDetailsRepositoryImplTest {
         fakeMovieDao = FakeMovieDao()
         movieDetailsRepositoryImpl = MovieDetailsRepositoryImpl(fakeMovieDao)
     }
-
+//    adding a movie to favorite and checking if it was added by the method isThisMovieFavorite
     @Test
     fun `isThisMovieFavorite should return true if the movie is favorite`() = runTest {
         // Given
@@ -34,6 +34,7 @@ class MovieDetailsRepositoryImplTest {
 
         // Then
 
-        assertTrue((result as AppResult.Success).successData )
-    }
+        assertTrue((result as AppResult.Success).successData ) //    should return true if the movie is favorite
+
+}
 }

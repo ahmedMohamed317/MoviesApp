@@ -1,28 +1,27 @@
 package com.task.paymob.base
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.task.paymob.utils.api.AppResult
-import com.task.paymob.utils.network.NetworkManager
 import com.task.paymob.utils.api.SingleLiveEvent
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-open class BaseViewModel() :
+open class BaseViewModel :
     ViewModel() {
-    val statusCode = SingleLiveEvent<Int?>()
+    private val statusCode = SingleLiveEvent<Int?>()
     val showError = SingleLiveEvent<String?>()
-    val checkConnection = SingleLiveEvent<Boolean?>()
     private var job: Job? = null
 
+/*
+    this method does a coroutine in the viewmodel scope and handles the retun which is app result
+  */
     fun <T> call(
         serverCall: suspend () -> AppResult<T>,
         onResponse: (AppResult<T>) -> Unit
     ) {
         job = viewModelScope.launch {
-            val result = serverCall()
-            when (result) {
+            when (val result = serverCall()) {
                 is AppResult.Success -> {
                     onResponse(result)
                 }
@@ -35,12 +34,7 @@ open class BaseViewModel() :
             }
         }
     }
-
-
-    fun isOnline(context: Context) {
-        checkConnection.value = NetworkManager.isOnline(context)
-    }
-
+    // canceling the job if oncleared is invoked which avoid memory leaks for background tasks
     override fun onCleared() {
         super.onCleared()
         job?.cancel()

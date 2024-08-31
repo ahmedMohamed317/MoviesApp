@@ -9,7 +9,7 @@ import com.task.paymob.utils.api.AppResult
 class SharedRepositoryImpl(
     private val dao : MovieDao
 ) : SharedRepository {
-
+    // return Appresult with boolean value if success or error if not , the adding proccess success or not
     override suspend fun addMovieToFavorite(movie: Movie): AppResult<Boolean> {
         return try {
             val result = dao.addMovieToFavorite(movie)
@@ -18,7 +18,7 @@ class SharedRepositoryImpl(
             AppResult.Error(e)
         }
     }
-
+    // return Appresult with boolean value if success or error if not , the deleting proccess success or not
     override suspend fun deleteMovieFromFavorite(movie: Movie): AppResult<Boolean> {
         return try {
             val result = dao.deleteMovieFromFavorite(movie)

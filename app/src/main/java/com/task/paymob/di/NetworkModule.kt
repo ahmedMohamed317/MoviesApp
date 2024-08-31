@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 val networkModule = module {
     val connectTimeout: Long = 40
     val readTimeout: Long = 40
-
+    // providing http client instance
     fun provideHttpClient(context: Context): OkHttpClient {
 
         val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
@@ -42,7 +42,7 @@ val networkModule = module {
             })
         return okHttpClientBuilder.build()
     }
-
+    // providing retrofit instance
     fun provideRetrofit(client: OkHttpClient, baseUrl: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)

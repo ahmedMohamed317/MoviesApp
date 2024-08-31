@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 
 val viewModelModule = module {
-
+    //providing viewmodels for fragments
     viewModel {
         HomeViewModel(repository = get() , sharedRepository = get() )
     }

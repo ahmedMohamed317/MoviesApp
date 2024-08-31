@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 
 val apiModule = module {
 
-
+    // providing api instance
     fun provideHomeApi(retrofit: Retrofit): HomeApi {
         return retrofit.create(HomeApi::class.java)
     }

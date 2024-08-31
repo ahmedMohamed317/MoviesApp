@@ -12,6 +12,9 @@ import retrofit2.Response
 
 
 object Utils {
+    // returning AppResult.Success with data if response is successful
+    // returning AppResult.Error with exception message if response is not successful
+
     fun <T : Any> handleApiError(resp: Response<T>): AppResult.Error {
         val error = ApiErrorUtils.parseError(resp)
         return AppResult.Error(Exception(error.message), resp.code())
@@ -23,6 +26,7 @@ object Utils {
         } ?: return handleApiError(response)
     }
 
+    // loading the image with glide and applying center crop and rounded corners also managing placeholders
     fun loadImage(context: Context
                   , path : String
                   , imageView: ImageView

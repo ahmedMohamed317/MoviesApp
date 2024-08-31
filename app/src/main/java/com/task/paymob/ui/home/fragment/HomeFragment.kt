@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initClicks() {
 
     }
-
+//    init observers
     override fun initViewModel() {
         observeMovies()
         observeFavoriteMovies()
@@ -41,17 +41,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onCreateInit() {
         getAllFavoriteMovies()
     }
-
+    // init adapter
     override fun initSetAdapter() {
         binding.moviesRv.adapter = homeMoviesAdapter
         setupPagination()
     }
-
+    // init toolbar
     override fun initToolBar() {
         binding.toolbar.backBtn.visibility = View.GONE
         binding.toolbar.tvTitle.text = getString(R.string.home)
     }
-
+    // getting movies from api of 2024 year and sorting is default
     private fun getMoviesForHome(year: String = "2024", sortBy: String = "") {
         showLoadingDialog()
         homeViewModel.getMoviesForHome(year, sortBy, homeViewModel.currentPage)
@@ -60,24 +60,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun getAllFavoriteMovies() {
         homeViewModel.getAllFavoriteMovies()
     }
-
+    // navigating to movie detail fragment if clicking on a movie
     private fun navigateToMovieDetailsFragment(movie: Movie) {
         if (checkCurrentDestination(R.id.homeFragment)) {
             val action = HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(movie)
             findNavController().navigate(action)
         }
     }
-
+    // adding favorite movie from home
     private fun addFavoriteMovie(movie: Movie, imageView: ImageView) {
         homeViewModel.addMovieToFavorite(movie)
         observeFavoriteActionSuccess(movie, imageView, true)
     }
-
+    // deleting favorite movie from home
     private fun deleteFavoriteMovie(movie: Movie, imageView: ImageView) {
         homeViewModel.deleteFavoriteMovie(movie)
         observeFavoriteActionSuccess(movie, imageView, false)
     }
-
+    // listening to the recycler view so if scrolled till the end of the page it loads more data for the api
     private fun setupPagination() {
         binding.moviesRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -94,7 +94,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         })
     }
-
+    // observing the api of getting movies so if the it succeeded and the page is one then submitting the list , but if succeded and page is
+    // bigger than one then it does pagination and adding the new items to the list
     @SuppressLint("NotifyDataSetChanged")
     private fun observeMovies() {
         homeViewModel.responseGetMovies.observe(viewLifecycleOwner) {
@@ -111,7 +112,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
     }
-
+    // getting favorite movies list from database then calling the api to get all the movies to show the movies that are favorite and that aren't
     private fun observeFavoriteMovies() {
         homeViewModel.responseGetFavoriteMovies.observe(viewLifecycleOwner) {
             homeViewModel.favoriteMoviesList.clear()
@@ -119,19 +120,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             getMoviesForHome()
         }
     }
-
+    // observing the adding or deleting favorite items success so if adding succeeded then it should add the item to favorite list
+    // and if deleting it should remove it from the list and show the icon indicates deletion
     private fun observeFavoriteActionSuccess(movie: Movie, imageView: ImageView, isAdded: Boolean) {
-        val observer = if (isAdded) homeViewModel.responseAddedToFavorite else homeViewModel.responseIsMovieDeleted
-        observer.observe(viewLifecycleOwner) {
-            if (isAdded) {
-                homeViewModel.favoriteMoviesList.add(movie)
-                imageView.setImageResource(R.drawable.fav_icon_filled)
-            } else {
-                homeViewModel.favoriteMoviesList.remove(movie)
-                imageView.setImageResource(R.drawable.fav_icon_unfilled)
+        if (isAdded) {
+            homeViewModel.responseAddedToFavorite.observe(viewLifecycleOwner) { success ->
+                if (success) {
+                    homeViewModel.favoriteMoviesList.add(movie)
+                    imageView.setImageResource(R.drawable.fav_icon_filled)
+                    homeViewModel.responseAddedToFavorite.removeObservers(viewLifecycleOwner)
+                }
+            }
+        } else {
+            homeViewModel.responseIsMovieDeleted.observe(viewLifecycleOwner) { success ->
+                if (success) {
+                    homeViewModel.favoriteMoviesList.remove(movie)
+                    imageView.setImageResource(R.drawable.fav_icon_unfilled)
+                    homeViewModel.responseIsMovieDeleted.removeObservers(viewLifecycleOwner)
+                }
             }
         }
     }
+
 
     private fun observeErrors() {
         homeViewModel.showError.observe(viewLifecycleOwner) {
@@ -149,14 +159,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun dismissLoadingDialog() {
         DialogUtil.dismissDialog()
     }
-
+    // handles error and dismiss loading dialog
     private fun handleError(message: String) {
         showSnackbar(message)
         dismissLoadingDialog()
         handleViewsVisibility(shouldViewRecycler = false)
     }
 
-
+    // handles if there is result for data then it should show rv and hide no result tv
+    // but if no result then vice versa depending of the boolean value
     private fun handleViewsVisibility(shouldViewRecycler :Boolean) {
         if (shouldViewRecycler) {
             binding.noResultsTv.visibility = View.GONE

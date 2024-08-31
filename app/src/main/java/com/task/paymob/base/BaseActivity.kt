@@ -20,9 +20,9 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         onCreateInit()
         initClicks()
     }
-
+    //abstract method for clicking events
     protected abstract fun initClicks()
-
+    //abstract method for init
     protected abstract fun onCreateInit()
 
     override fun onDestroy() {

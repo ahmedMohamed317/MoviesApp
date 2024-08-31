@@ -10,6 +10,8 @@ import retrofit2.http.Query
 
 
 interface HomeApi {
+    // getting movies from api with query params , year for the year of the movies which is 2024 is determined in task
+    // sort is default and page varies depends on the page showing
     @GET(APIS.GET_MOVIES)
     suspend fun getMoviesForHome(
         @Query(QUERY.QUERY_PRIMARY_RELEASE_YEAR) year: String,

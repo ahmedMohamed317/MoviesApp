@@ -30,7 +30,7 @@ class HomeViewModelTest {
         fakeRepository = FakeHomeRepository()
         viewModel = HomeViewModel(fakeRepository, fakeRepository)
     }
-
+//    adding a movie to the fake api movies list and check if the size equal 1 to pass the test
     @Test
     fun `getMoviesForHome should return a list of movies`() = runTest {
         // Given
@@ -44,7 +44,7 @@ class HomeViewModelTest {
         assertEquals(1, viewModel.responseGetMovies.getOrAwaitValue()?.results?.size) // Assuming only one movie is added
         assertEquals(movie, viewModel.responseGetMovies.getOrAwaitValue()?.results?.get(0)) // Asserting the added movie
     }
-
+//    adding a movie to the favorite and check the return if it's true  which means the movie was added to the favorite list'
     @Test
     fun `addMovieToFavorite should add a movie to the favorites`() = runTest {
         // Given
@@ -55,9 +55,10 @@ class HomeViewModelTest {
 
         // Then
         assertEquals(true, viewModel.responseAddedToFavorite.getOrAwaitValue())
-        assertEquals(movie, fakeRepository.favoriteMovies[0])
+        assertEquals(movie, fakeRepository.favoriteMovies[0]) // check if the added movie is the movie in the favorite list
     }
-
+//    deleting a movie from the favorite and check the return if it's true  which means the movie was deleted from the favorite list
+//    also check if the favorite list is empty
     @Test
     fun `deleteFavoriteMovie should remove a movie from the favorites`() = runTest {
         // Given

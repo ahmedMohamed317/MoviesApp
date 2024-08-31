@@ -30,14 +30,13 @@ class HomeMoviesAdapter(
     override fun onBindViewHolder(holder: ItemHomeMovieViewHolder, position: Int) {
         val movie = getItem(position)
         holder.bind(movie)
-        handleItemsDimension(holder)
     }
 
     inner class ItemHomeMovieViewHolder(
         private val binding: ItemHomeMovieBinding,
         val context: Context
     ) : RecyclerView.ViewHolder(binding.root) {
-
+        // handling the views and data
         fun bind(movie: Movie) {
             binding.movieName.text = movie.title
             binding.movieName.isSelected = true
@@ -65,14 +64,7 @@ class HomeMoviesAdapter(
         }
     }
 
-    private fun handleItemsDimension(holder: ItemHomeMovieViewHolder) {
-        val screenWidth = holder.itemView.context.resources.displayMetrics.widthPixels
-        val itemWidth = (screenWidth / 2) - 98
-        val layoutParams = holder.itemView.layoutParams
-        layoutParams.width = itemWidth
-        holder.itemView.layoutParams = layoutParams
-    }
-
+    // check if the movie is favorite or not then control the button drawable
     private fun handleFavoriteButtonView(button:ImageView,movie: Movie){
         if (movie.id in favoriteMoviesList.map { it.id }) {
             button.setImageResource(R.drawable.fav_icon_filled)
@@ -80,6 +72,7 @@ class HomeMoviesAdapter(
             button.setImageResource(R.drawable.fav_icon_unfilled)
         }
     }
+    // check if the movie is favorite or not then control the add or delete action to database
     private fun handleFavoriteButtonClick(button:ImageView,movie: Movie){
         if (movie.id in favoriteMoviesList.map { it.id }) {
             deleteFavoriteMovie(movie,button)

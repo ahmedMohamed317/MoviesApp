@@ -11,7 +11,7 @@ import com.task.paymob.utils.app.Utils.handleSuccess
 class HomeRepositoryImpl(
     private val api: HomeApi, private val dao : MovieDao,
 ) : HomeRepository {
-
+    // return Appresult with movies data if success or error if not
     override suspend fun getMovies( year: String , sortBy: String , page: Int): AppResult<ResponseGetMovies> {
         return try {
             val response = api.getMoviesForHome(year ,sortBy,page)
@@ -25,7 +25,7 @@ class HomeRepositoryImpl(
         }
     }
 
-
+    // return Appresult with favorite movies data if success or error if not
     override suspend fun getAllFavoriteMovies(): AppResult<List<Movie>> {
         return try {
             val movies = dao.getFavoriteMovies()

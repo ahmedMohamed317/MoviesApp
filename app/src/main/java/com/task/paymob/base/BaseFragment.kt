@@ -35,49 +35,35 @@ abstract class BaseFragment<VDB : ViewBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleBars()
-        setData()
         initToolBar()
         onCreateInit()
-        getFirebaseToken()
         initSetAdapter()
         initViewModel()
         initClicks()
 
     }
-
-    override fun onResume() {
-        super.onResume()
-        setData()
-
-    }
-
-    private fun setData() {
-        //USER_DATA.CURRENT_USER = PreferencesUtils(requireContext()).getUserData(USER_DATA_KEY)
-    }
-
-    private fun getFirebaseToken() {
-//        FirebaseToken.getToken()
-    }
-
+    //adding abstract fun for clicking events
     protected abstract fun initClicks()
-
+    // adding abstract fun for viewmodel
     protected abstract fun initViewModel()
-
+    //adding abstract fun for init at fragment creation
     protected abstract fun onCreateInit()
-
+    //adding abstract fun for setting adapter
     protected abstract fun initSetAdapter()
-
+    // adding abstract fun for setting toolbar
     protected abstract fun initToolBar()
 
+    // checking current destination and return true if the current destination is the same as parameter so i can navigate after
     fun checkCurrentDestination(currentFragment: Int): Boolean {
         return findNavController().currentDestination?.id == currentFragment
     }
 
+    // showing snackbar for error messages
     fun showSnackbar(message: String?) {
         snackBar = Snackbar.make(_binding!!.root, message!!, Snackbar.LENGTH_LONG)
         snackBar?.show()
     }
-
+    //dismissing snackbars
     override fun onPause() {
         super.onPause()
         if (snackBar != null) {
@@ -85,6 +71,7 @@ abstract class BaseFragment<VDB : ViewBinding> : Fragment() {
         }
     }
 
+    //showing  status bar and navigation bar
     private fun handleBars() {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 

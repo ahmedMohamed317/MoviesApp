@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 
 val roomModule = module {
-
+    // providing dao instance
     fun provideRoomDao(context: Context): MovieDao {
         return AppDatabase.getDaoInstance(context)
     }

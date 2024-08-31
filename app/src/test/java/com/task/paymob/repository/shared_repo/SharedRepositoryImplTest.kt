@@ -21,7 +21,7 @@ class SharedRepositoryImplTest {
         fakeMovieDao = FakeMovieDao()
         sharedRepository = SharedRepositoryImpl(fakeMovieDao)
     }
-
+    // adding fake movie to favorite and check the return if it is true and also check by the method isThisMovieFavorite
     @Test
     fun `addMovieToFavorite should return success when movie is added successfully`() = runTest {
         // Given
@@ -37,7 +37,8 @@ class SharedRepositoryImplTest {
     }
 
 
-
+    // deleting fake movie from favorite and check the return if it is true and also check by the method isThisMovieFavorite
+    // by using assert false as the movie should not be in the favorite list
     @Test
     fun `deleteMovieFromFavorite should return success when movie is deleted successfully`() = runTest {
 

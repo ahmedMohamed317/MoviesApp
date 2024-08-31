@@ -1,4 +1,4 @@
-package com.task.paymob.ui.payment
+package com.task.paymob.ui.movie_details
 
 import android.view.LayoutInflater
 import android.view.View
@@ -47,7 +47,7 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
     private fun navigateUp(){
         findNavController().navigateUp()
     }
-
+//    setup the data for the views of the fragment and from the args movie
     private fun setupMovieData(){
         binding.movieNameTv.text = args.movie.title
         binding.movieNameTv.isSelected = true
@@ -68,6 +68,7 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
         binding.languageTv.text = getString(R.string.language_format , args.movie.originalLanguage)
 
     }
+    // add favorite movie to database and control the view drawable if succeeded
 
     private fun addFavoriteMovie(){
         moviesDetailsViewModel.addMovieToFavorite(args.movie)
@@ -80,7 +81,7 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
 
 
     }
-
+    // delete favorite movie from database and control the view drawable if succeeded
     private fun deleteFavoriteMovie(){
         moviesDetailsViewModel.deleteFavoriteMovie(args.movie)
         moviesDetailsViewModel.responseIsMovieDeleted.observe(viewLifecycleOwner) {
@@ -92,7 +93,7 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
 
 
     }
-
+    // check if the movie is favorite or not and managing the favorite button
     private fun isTheMovieFavorite(movie: Movie){
         moviesDetailsViewModel.isThisMovieFavorite(movie.id)
         moviesDetailsViewModel.responseIsThisMovieFavorite.observe(viewLifecycleOwner) { isFavorite ->

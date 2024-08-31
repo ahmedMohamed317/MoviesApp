@@ -26,9 +26,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onCreateInit() {
         initViews()
+        // disable night mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         lifecycleScope.launch {
             try {
+                // check network connection
                 checkNetworkObserver()
             }catch (e :Exception){
                 Timber.tag("TAG").d(e.message.toString())
